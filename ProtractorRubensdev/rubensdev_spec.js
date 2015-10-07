@@ -1,6 +1,4 @@
-var todoList = {
-    list : [ "First Task", "Second Task", "Third task" ]
-};
+var todoList = require('./tasks.json');
 
 describe('rubensdev homepage', function() {
     var EC = protractor.ExpectedConditions;
@@ -95,7 +93,7 @@ describe('rubensdev homepage', function() {
             for ( var i in todoList.list) {
                 addBtn.click();
                 dv.sleep(500);
-                element(by.name('newTask')).sendKeys(todoList.list[i]);
+                element(by.name('newTask')).sendKeys(todoList.list[i].task);
                 dv.sleep(500);
                 element(by.id('submitButton')).click();
                 dv.sleep(500);
@@ -104,7 +102,7 @@ describe('rubensdev homepage', function() {
             taskList = element.all(by.repeater('task in tasks'));
 
             for ( var i in todoList.list) {
-                expect(taskList.get(i).getText()).toEqual(todoList.list[i]);
+                expect(taskList.get(i).getText()).toEqual(todoList.list[i].task.substring(0, 140));
             }
 
             expect(taskList.count()).toEqual(todoList.list.length);
