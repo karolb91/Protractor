@@ -45,6 +45,7 @@ RubensPage.prototype = Object.create({}, {
             dv.findElement(addButton).click();
             helper.waitForElementVisible(textFieldOfTask);
             dv.findElement(textFieldOfTask).sendKeys(text);
+            helper.waitForElementVisible(submitButton);
             dv.findElement(submitButton).click();
         }
     },
